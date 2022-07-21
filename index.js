@@ -2,6 +2,7 @@ process.env.NODE_ENV = 'develop'
 const keys = require('./keys/index.js')
 const path = require('path')
 const express = require('express')
+const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const routeHome = require('./routes/routerHome')
 const routeCart = require('./routes/routerCart')
@@ -32,7 +33,20 @@ app.use('/courses', routeCourses)
 app.use('/add', routeAdd)
 app.use('/cart', routeCart)
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}...`);
-  console.log('process.env.NODE_ENV === ', process.env.NODE_ENV);
-})
+async function start() {
+  try {
+    mongoose.connect(keys.mongoLoc, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}...`);
+      console.log('process.env.NODE_ENV === ', process.env.NODE_ENV);
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+start()
+

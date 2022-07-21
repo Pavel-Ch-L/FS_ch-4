@@ -1,6 +1,6 @@
 <h1>Редактировать курс</h1>
 
-<form action="/courses/edit" method="post">
+<form action="/courses/edit" method="post" class="course-edit">
   <div class="row">
     <div class="input-field col s12">
       <input id="title" name="title" type="text" class="validate" required value="{{course.title}}">
@@ -24,4 +24,8 @@
   </div>
   <input type="hidden" name="id" value="{{course.id}}">
   <button class="btn" type="submit">Редактировать курс</button>
+</form>
+<form action="/courses/remove" method="post">
+  <input type="hidden" name="id" value="{{course.id}}">
+  <button class="btn red" type="submit">Удалить курс</button>
 </form>
