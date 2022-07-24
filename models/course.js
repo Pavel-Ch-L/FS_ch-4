@@ -10,7 +10,11 @@ const course = new Schema({
     type: Number,
     require
   },
-  img: String
+  img: String,
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 course.plugin(mongooseLeanId)
